@@ -56,6 +56,7 @@ export default function ListOfBibleStudies({
         //   }
 
         //   }
+        className="w-full"
         >
           {/* TODO: view by authorization */}
           <ButtonAddEditBibleStudy variant={'default'}>Add new</ButtonAddEditBibleStudy>

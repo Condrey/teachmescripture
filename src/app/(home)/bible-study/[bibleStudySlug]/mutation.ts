@@ -3,6 +3,8 @@ import { QueryKey, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { deleteChapter, upsertChapter } from "./action";
 
+  const queryKey2:QueryKey = ["bible-study-series"]
+
 export function useUpsertChapterMutation(slug: string) {
   const queryClient = useQueryClient();
   const queryKey: QueryKey = ["chapters", slug];
@@ -20,6 +22,7 @@ export function useUpsertChapterMutation(slug: string) {
       }
 
       queryClient.invalidateQueries({ queryKey });
+      queryClient.invalidateQueries({ queryKey:queryKey2 });
     },
     onError(error, variables) {
       console.error(error);
@@ -41,19 +44,15 @@ export function useDeleteChapterMutation(slug: string) {
     mutationFn: deleteChapter,
     async onSuccess(data, variables) {
       await queryClient.cancelQueries({ queryKey });
-      queryClient.setQueryData<BibleStudyData[]>(queryKey, (oldData) => {
-        if (!oldData) {
-          queryClient.invalidateQueries({ queryKey: ["chapters"] });
-          return;
-        }
+      
 
         toast.success(
           `Successfully deleted ${data.title} chapter from the database`
         );
         queryClient.invalidateQueries({ queryKey });
+      queryClient.invalidateQueries({ queryKey:queryKey2 });
 
-        return oldData.filter((d) => d.id !== data.id);
-      });
+   
     },
     onError(error, variables) {
       console.error(error);

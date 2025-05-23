@@ -8,7 +8,7 @@ const MAX_QUANTITY = 4;
 export default async function Home() {
   const bibleStudies = await getBibleStudySeriesByMaxQuantity(MAX_QUANTITY + 1);
   return (
-    <div className="flex flex-col gap-12  w-full mx-auto ">
+    <div className="flex flex-col gap-12   w-full  ">
       <Heading1 title={webName} />
 
       {/* Bible study series  */}

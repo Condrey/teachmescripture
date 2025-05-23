@@ -46,7 +46,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <TooltipProvider>
-              <div className="bg-sidebar/80 dark:bg-background/10 size-full min-h-dvh">
+              <div className="bg-sidebar/80 dark:bg-background/10  size-full min-h-dvh">
                 {children}
               </div>
             </TooltipProvider>

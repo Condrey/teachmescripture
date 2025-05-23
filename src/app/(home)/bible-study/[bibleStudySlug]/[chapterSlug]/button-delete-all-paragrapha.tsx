@@ -12,24 +12,25 @@ import {
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { AlertTriangleIcon } from "lucide-react";
 import { useState } from "react";
-import { useDeleteChapterMutation } from "./mutation";
-import { Chapter } from "@/generated/prisma";
-import { ChapterData } from "@/lib/types";
+import { useDeleteAllParagraphsMutation } from "./mutation";
+import { Chapter, Paragraph } from "@/generated/prisma";
+import { ParagraphData } from "@/lib/types";
 
-interface ButtonDeleteChapterProps extends ButtonProps {
-  chapterToDelete: ChapterData;
+interface ButtonDeleteAllParagraphsProps extends ButtonProps {
+  chapterWithParagraphs: Chapter;
 }
 
-export default function ButtonDeleteChapter({
-  chapterToDelete,
+export default function ButtonDeleteAllParagraphs({
+    chapterWithParagraphs
+,
   ...props
-}: ButtonDeleteChapterProps) {
+}: ButtonDeleteAllParagraphsProps) {
   const [open, setOpen] = useState(false);
 
   return (
     <>
       <Button onClick={() => setOpen(true)} {...props} />
-      <DialogDeleteChapter chapter={chapterToDelete} open={open}
+      <DialogDeleteAllParagraphs chapter={chapterWithParagraphs} open={open}
       setOpen={setOpen}
       />
     </>
@@ -37,29 +38,29 @@ export default function ButtonDeleteChapter({
 }
 
 
-interface DialogDeleteChapterProps{
+interface DialogDeleteAllParagraphsProps{
     open:boolean;
     setOpen:(open:boolean)=>void;
-    chapter:ChapterData
+    chapter:Chapter
 }
-export function DialogDeleteChapter({open,setOpen,chapter,}:DialogDeleteChapterProps){
-      const {mutate,isPending} = useDeleteChapterMutation(chapter.bibleStudy?.slug!);
+export function DialogDeleteAllParagraphs({open,setOpen,chapter,}:DialogDeleteAllParagraphsProps){
+      const {mutate,isPending} = useDeleteAllParagraphsMutation(chapter.slug!);
   function handleDelete() {
     mutate(chapter.id,{onSuccess:()=>setOpen(false)})
   }
     return <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle className="font-bold tracking-tight uppercase ">
+            <DialogTitle className="font-bold tracking-tight uppercase text-destructive">
               <AlertTriangleIcon className="inline" />
-              Delete <q>{chapter.title}</q> bible study series chapter
+              Delete all paragraphs in {chapter.title}?
             </DialogTitle>
             <DialogDescription>
               Dangerous action. Please note that this action is irreversible
             </DialogDescription>
           </DialogHeader>
           <p>
-            You are about to delete <strong>{chapter.title}</strong> bible study series chapter and all its
+            You are about to delete all paragraphs in <strong>{chapter.title}</strong> and all its
             related information from the database, <i>continue with caution!</i>
           </p>
           <DialogFooter>

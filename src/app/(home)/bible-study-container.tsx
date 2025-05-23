@@ -91,7 +91,7 @@ export default function BibleStudyContainer({
         />
       </CardHeader>
       <CardFooter className="justify-end  gap-2">
-        <LoadingButton loading={isPending}>
+        <LoadingButton loading={isPending} onClick={()=>startTransition(()=>{})}>
           <Link
             href={url}
             className="group-hover/bible-study-container:*:translate-x-1 *:transition-all items-center flex gap-2"

@@ -12,24 +12,24 @@ import {
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { AlertTriangleIcon } from "lucide-react";
 import { useState } from "react";
-import { useDeleteChapterMutation } from "./mutation";
-import { Chapter } from "@/generated/prisma";
-import { ChapterData } from "@/lib/types";
+import { useDeleteParagraphMutation } from "./mutation";
+import { Paragraph } from "@/generated/prisma";
+import { ParagraphData } from "@/lib/types";
 
-interface ButtonDeleteChapterProps extends ButtonProps {
-  chapterToDelete: ChapterData;
+interface ButtonDeleteParagraphProps extends ButtonProps {
+  paragraphToDelete: ParagraphData;
 }
 
-export default function ButtonDeleteChapter({
-  chapterToDelete,
+export default function ButtonDeleteParagraph({
+  paragraphToDelete,
   ...props
-}: ButtonDeleteChapterProps) {
+}: ButtonDeleteParagraphProps) {
   const [open, setOpen] = useState(false);
 
   return (
     <>
       <Button onClick={() => setOpen(true)} {...props} />
-      <DialogDeleteChapter chapter={chapterToDelete} open={open}
+      <DialogDeleteParagraph paragraph={paragraphToDelete} open={open}
       setOpen={setOpen}
       />
     </>
@@ -37,29 +37,29 @@ export default function ButtonDeleteChapter({
 }
 
 
-interface DialogDeleteChapterProps{
+interface DialogDeleteParagraphProps{
     open:boolean;
     setOpen:(open:boolean)=>void;
-    chapter:ChapterData
+    paragraph:ParagraphData
 }
-export function DialogDeleteChapter({open,setOpen,chapter,}:DialogDeleteChapterProps){
-      const {mutate,isPending} = useDeleteChapterMutation(chapter.bibleStudy?.slug!);
+export function DialogDeleteParagraph({open,setOpen,paragraph,}:DialogDeleteParagraphProps){
+      const {mutate,isPending} = useDeleteParagraphMutation(paragraph.chapter?.slug!);
   function handleDelete() {
-    mutate(chapter.id,{onSuccess:()=>setOpen(false)})
+    mutate(paragraph.id,{onSuccess:()=>setOpen(false)})
   }
     return <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle className="font-bold tracking-tight uppercase ">
               <AlertTriangleIcon className="inline" />
-              Delete <q>{chapter.title}</q> bible study series chapter
+              Delete this bible study series paragraph
             </DialogTitle>
             <DialogDescription>
               Dangerous action. Please note that this action is irreversible
             </DialogDescription>
           </DialogHeader>
           <p>
-            You are about to delete <strong>{chapter.title}</strong> bible study series chapter and all its
+            You are about to delete this bible study series paragraph and all its
             related information from the database, <i>continue with caution!</i>
           </p>
           <DialogFooter>

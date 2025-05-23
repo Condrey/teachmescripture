@@ -18,10 +18,11 @@ import {
   Trash2Icon,
 } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { DialogDeleteBibleStudy } from "./button-delete-bible-study";
 import FormAddEditBibleStudy from "./form-add-edit-bible-study";
 import FormAddEditChapter from "./bible-study/[bibleStudySlug]/form-add-edit-chapter";
+import LoadingButton from "@/components/loading-button";
 
 interface DropDownMenuPropsBibleStudyContainerProps {
   bibleStudy: BibleStudy;
@@ -35,7 +36,7 @@ export default function DropDownMenuBibleStudyContainer({
 
   const { getNavigationLinkWithPathnameWithoutUpdate } =
     useCustomSearchParams();
-
+const [isPending, startTransition] = useTransition();
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [openEditDialog, setOpenEditDialog] = useState(false);
   const [openAddChapterDialog, setOpenAddChapterDialog] = useState(false);
@@ -49,16 +50,16 @@ export default function DropDownMenuBibleStudyContainer({
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild className=" z-30">
-          <Button size={"icon"} variant={"ghost"}>
+          <LoadingButton loading={isPending} size={"icon"} variant={"ghost"}>
             <MoreHorizontalIcon />
             <span className="sr-only">Open for more</span>
-          </Button>
+          </LoadingButton>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuGroup>
             <DropdownMenuLabel>Perform Actions</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem asChild>
+            <DropdownMenuItem onClick={()=>startTransition(()=>{})} asChild>
               <Link href={url}>
                 <ArrowUpRightIcon /> View bible study series
               </Link>

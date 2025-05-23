@@ -9,7 +9,7 @@ import { cache } from "react"
 async function bibleStudyBySlug(slug:string){
 return await prisma.bibleStudy.findUnique({
     where:{slug},
-    include: bibleStudyDataInclude
+    include: bibleStudyDataInclude,
 })
 }
 

@@ -22,6 +22,7 @@ import Link from "next/link";
 import { useState, useTransition } from "react";
 import { DialogDeleteChapter } from "./button-delete-chapter";
 import FormAddEditChapter from "./form-add-edit-chapter";
+import { DialogDeleteAllParagraphs } from "./[chapterSlug]/button-delete-all-paragrapha";
 
 interface DropDownMenuPropsChapterContainerProps {
   chapter: ChapterData;
@@ -31,15 +32,15 @@ export default function DropDownMenuChapterContainer({
 }: DropDownMenuPropsChapterContainerProps) {
   // TODO: Perform authentication
 
-  const { getNavigationLinkWithPathnameWithoutUpdate } =
+  const { getNavigationLinkWithoutUpdate } =
     useCustomSearchParams();
   const [isPending, startTransition] = useTransition();
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [openEditDialog, setOpenEditDialog] = useState(false);
-  const [openAddChapterDialog, setOpenAddChapterDialog] = useState(false);
+  const [openDeleteAllParagraphsDialog, setOpenDeleteAllParagraphsDialog] = useState(false);
 
-  const url = getNavigationLinkWithPathnameWithoutUpdate(
-    "/bible-study/" + chapter.slug
+  const url = getNavigationLinkWithoutUpdate(
+    "/" + chapter.slug
   );
 
   return (
@@ -74,6 +75,16 @@ export default function DropDownMenuChapterContainer({
               <Trash2Icon /> Delete chapter
             </DropdownMenuItem>
           </DropdownMenuGroup>
+          <DropdownMenuGroup>
+            <DropdownMenuLabel>Secondary actions</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              onClick={() => setOpenDeleteAllParagraphsDialog(true)}
+              className=" capitalize w-full justify-start text-muted-foreground"
+            >
+              <Trash2Icon /> Delete all paragraphs
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
       <FormAddEditChapter
@@ -87,6 +98,7 @@ export default function DropDownMenuChapterContainer({
         open={openDeleteDialog}
         setOpen={setOpenDeleteDialog}
       />
+      <DialogDeleteAllParagraphs open={openDeleteAllParagraphsDialog} setOpen={setOpenDeleteAllParagraphsDialog} chapter={chapter} />
     </>
   );
 }

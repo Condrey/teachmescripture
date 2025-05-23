@@ -2239,6 +2239,7 @@ export namespace Prisma {
   export type ChapterMinAggregateOutputType = {
     id: string | null
     index: number | null
+    imageUrl: string | null
     title: string | null
     slug: string | null
     bibleStudyId: string | null
@@ -2247,6 +2248,7 @@ export namespace Prisma {
   export type ChapterMaxAggregateOutputType = {
     id: string | null
     index: number | null
+    imageUrl: string | null
     title: string | null
     slug: string | null
     bibleStudyId: string | null
@@ -2255,6 +2257,7 @@ export namespace Prisma {
   export type ChapterCountAggregateOutputType = {
     id: number
     index: number
+    imageUrl: number
     title: number
     slug: number
     bibleStudyId: number
@@ -2273,6 +2276,7 @@ export namespace Prisma {
   export type ChapterMinAggregateInputType = {
     id?: true
     index?: true
+    imageUrl?: true
     title?: true
     slug?: true
     bibleStudyId?: true
@@ -2281,6 +2285,7 @@ export namespace Prisma {
   export type ChapterMaxAggregateInputType = {
     id?: true
     index?: true
+    imageUrl?: true
     title?: true
     slug?: true
     bibleStudyId?: true
@@ -2289,6 +2294,7 @@ export namespace Prisma {
   export type ChapterCountAggregateInputType = {
     id?: true
     index?: true
+    imageUrl?: true
     title?: true
     slug?: true
     bibleStudyId?: true
@@ -2384,6 +2390,7 @@ export namespace Prisma {
   export type ChapterGroupByOutputType = {
     id: string
     index: number
+    imageUrl: string | null
     title: string
     slug: string
     bibleStudyId: string | null
@@ -2411,6 +2418,7 @@ export namespace Prisma {
   export type ChapterSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     index?: boolean
+    imageUrl?: boolean
     title?: boolean
     slug?: boolean
     bibleStudyId?: boolean
@@ -2422,6 +2430,7 @@ export namespace Prisma {
   export type ChapterSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     index?: boolean
+    imageUrl?: boolean
     title?: boolean
     slug?: boolean
     bibleStudyId?: boolean
@@ -2431,6 +2440,7 @@ export namespace Prisma {
   export type ChapterSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     index?: boolean
+    imageUrl?: boolean
     title?: boolean
     slug?: boolean
     bibleStudyId?: boolean
@@ -2440,12 +2450,13 @@ export namespace Prisma {
   export type ChapterSelectScalar = {
     id?: boolean
     index?: boolean
+    imageUrl?: boolean
     title?: boolean
     slug?: boolean
     bibleStudyId?: boolean
   }
 
-  export type ChapterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "index" | "title" | "slug" | "bibleStudyId", ExtArgs["result"]["chapter"]>
+  export type ChapterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "index" | "imageUrl" | "title" | "slug" | "bibleStudyId", ExtArgs["result"]["chapter"]>
   export type ChapterInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     paragraphs?: boolean | Chapter$paragraphsArgs<ExtArgs>
     bibleStudy?: boolean | Chapter$bibleStudyArgs<ExtArgs>
@@ -2467,6 +2478,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       index: number
+      imageUrl: string | null
       title: string
       slug: string
       bibleStudyId: string | null
@@ -2897,6 +2909,7 @@ export namespace Prisma {
   interface ChapterFieldRefs {
     readonly id: FieldRef<"Chapter", 'String'>
     readonly index: FieldRef<"Chapter", 'Int'>
+    readonly imageUrl: FieldRef<"Chapter", 'String'>
     readonly title: FieldRef<"Chapter", 'String'>
     readonly slug: FieldRef<"Chapter", 'String'>
     readonly bibleStudyId: FieldRef<"Chapter", 'String'>
@@ -3370,33 +3383,33 @@ export namespace Prisma {
   }
 
   export type ParagraphAvgAggregateOutputType = {
-    number: number | null
+    index: number | null
   }
 
   export type ParagraphSumAggregateOutputType = {
-    number: number | null
+    index: number | null
   }
 
   export type ParagraphMinAggregateOutputType = {
     id: string | null
+    index: number | null
     line: string | null
-    number: number | null
     isTag: boolean | null
     chapterId: string | null
   }
 
   export type ParagraphMaxAggregateOutputType = {
     id: string | null
+    index: number | null
     line: string | null
-    number: number | null
     isTag: boolean | null
     chapterId: string | null
   }
 
   export type ParagraphCountAggregateOutputType = {
     id: number
+    index: number
     line: number
-    number: number
     isTag: number
     chapterId: number
     _all: number
@@ -3404,33 +3417,33 @@ export namespace Prisma {
 
 
   export type ParagraphAvgAggregateInputType = {
-    number?: true
+    index?: true
   }
 
   export type ParagraphSumAggregateInputType = {
-    number?: true
+    index?: true
   }
 
   export type ParagraphMinAggregateInputType = {
     id?: true
+    index?: true
     line?: true
-    number?: true
     isTag?: true
     chapterId?: true
   }
 
   export type ParagraphMaxAggregateInputType = {
     id?: true
+    index?: true
     line?: true
-    number?: true
     isTag?: true
     chapterId?: true
   }
 
   export type ParagraphCountAggregateInputType = {
     id?: true
+    index?: true
     line?: true
-    number?: true
     isTag?: true
     chapterId?: true
     _all?: true
@@ -3524,8 +3537,8 @@ export namespace Prisma {
 
   export type ParagraphGroupByOutputType = {
     id: string
+    index: number
     line: string
-    number: number
     isTag: boolean
     chapterId: string | null
     _count: ParagraphCountAggregateOutputType | null
@@ -3551,8 +3564,8 @@ export namespace Prisma {
 
   export type ParagraphSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    index?: boolean
     line?: boolean
-    number?: boolean
     isTag?: boolean
     chapterId?: boolean
     chapter?: boolean | Paragraph$chapterArgs<ExtArgs>
@@ -3560,8 +3573,8 @@ export namespace Prisma {
 
   export type ParagraphSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    index?: boolean
     line?: boolean
-    number?: boolean
     isTag?: boolean
     chapterId?: boolean
     chapter?: boolean | Paragraph$chapterArgs<ExtArgs>
@@ -3569,8 +3582,8 @@ export namespace Prisma {
 
   export type ParagraphSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    index?: boolean
     line?: boolean
-    number?: boolean
     isTag?: boolean
     chapterId?: boolean
     chapter?: boolean | Paragraph$chapterArgs<ExtArgs>
@@ -3578,13 +3591,13 @@ export namespace Prisma {
 
   export type ParagraphSelectScalar = {
     id?: boolean
+    index?: boolean
     line?: boolean
-    number?: boolean
     isTag?: boolean
     chapterId?: boolean
   }
 
-  export type ParagraphOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "line" | "number" | "isTag" | "chapterId", ExtArgs["result"]["paragraph"]>
+  export type ParagraphOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "index" | "line" | "isTag" | "chapterId", ExtArgs["result"]["paragraph"]>
   export type ParagraphInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     chapter?: boolean | Paragraph$chapterArgs<ExtArgs>
   }
@@ -3602,8 +3615,8 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      index: number
       line: string
-      number: number
       isTag: boolean
       chapterId: string | null
     }, ExtArgs["result"]["paragraph"]>
@@ -4031,8 +4044,8 @@ export namespace Prisma {
    */
   interface ParagraphFieldRefs {
     readonly id: FieldRef<"Paragraph", 'String'>
+    readonly index: FieldRef<"Paragraph", 'Int'>
     readonly line: FieldRef<"Paragraph", 'String'>
-    readonly number: FieldRef<"Paragraph", 'Int'>
     readonly isTag: FieldRef<"Paragraph", 'Boolean'>
     readonly chapterId: FieldRef<"Paragraph", 'String'>
   }
@@ -4496,6 +4509,7 @@ export namespace Prisma {
   export const ChapterScalarFieldEnum: {
     id: 'id',
     index: 'index',
+    imageUrl: 'imageUrl',
     title: 'title',
     slug: 'slug',
     bibleStudyId: 'bibleStudyId'
@@ -4506,8 +4520,8 @@ export namespace Prisma {
 
   export const ParagraphScalarFieldEnum: {
     id: 'id',
+    index: 'index',
     line: 'line',
-    number: 'number',
     isTag: 'isTag',
     chapterId: 'chapterId'
   };
@@ -4659,6 +4673,7 @@ export namespace Prisma {
     NOT?: ChapterWhereInput | ChapterWhereInput[]
     id?: StringFilter<"Chapter"> | string
     index?: IntFilter<"Chapter"> | number
+    imageUrl?: StringNullableFilter<"Chapter"> | string | null
     title?: StringFilter<"Chapter"> | string
     slug?: StringFilter<"Chapter"> | string
     bibleStudyId?: StringNullableFilter<"Chapter"> | string | null
@@ -4669,6 +4684,7 @@ export namespace Prisma {
   export type ChapterOrderByWithRelationInput = {
     id?: SortOrder
     index?: SortOrder
+    imageUrl?: SortOrderInput | SortOrder
     title?: SortOrder
     slug?: SortOrder
     bibleStudyId?: SortOrderInput | SortOrder
@@ -4683,6 +4699,7 @@ export namespace Prisma {
     OR?: ChapterWhereInput[]
     NOT?: ChapterWhereInput | ChapterWhereInput[]
     index?: IntFilter<"Chapter"> | number
+    imageUrl?: StringNullableFilter<"Chapter"> | string | null
     title?: StringFilter<"Chapter"> | string
     bibleStudyId?: StringNullableFilter<"Chapter"> | string | null
     paragraphs?: ParagraphListRelationFilter
@@ -4692,6 +4709,7 @@ export namespace Prisma {
   export type ChapterOrderByWithAggregationInput = {
     id?: SortOrder
     index?: SortOrder
+    imageUrl?: SortOrderInput | SortOrder
     title?: SortOrder
     slug?: SortOrder
     bibleStudyId?: SortOrderInput | SortOrder
@@ -4708,6 +4726,7 @@ export namespace Prisma {
     NOT?: ChapterScalarWhereWithAggregatesInput | ChapterScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Chapter"> | string
     index?: IntWithAggregatesFilter<"Chapter"> | number
+    imageUrl?: StringNullableWithAggregatesFilter<"Chapter"> | string | null
     title?: StringWithAggregatesFilter<"Chapter"> | string
     slug?: StringWithAggregatesFilter<"Chapter"> | string
     bibleStudyId?: StringNullableWithAggregatesFilter<"Chapter"> | string | null
@@ -4718,8 +4737,8 @@ export namespace Prisma {
     OR?: ParagraphWhereInput[]
     NOT?: ParagraphWhereInput | ParagraphWhereInput[]
     id?: StringFilter<"Paragraph"> | string
+    index?: IntFilter<"Paragraph"> | number
     line?: StringFilter<"Paragraph"> | string
-    number?: IntFilter<"Paragraph"> | number
     isTag?: BoolFilter<"Paragraph"> | boolean
     chapterId?: StringNullableFilter<"Paragraph"> | string | null
     chapter?: XOR<ChapterNullableScalarRelationFilter, ChapterWhereInput> | null
@@ -4727,8 +4746,8 @@ export namespace Prisma {
 
   export type ParagraphOrderByWithRelationInput = {
     id?: SortOrder
+    index?: SortOrder
     line?: SortOrder
-    number?: SortOrder
     isTag?: SortOrder
     chapterId?: SortOrderInput | SortOrder
     chapter?: ChapterOrderByWithRelationInput
@@ -4739,8 +4758,8 @@ export namespace Prisma {
     AND?: ParagraphWhereInput | ParagraphWhereInput[]
     OR?: ParagraphWhereInput[]
     NOT?: ParagraphWhereInput | ParagraphWhereInput[]
+    index?: IntFilter<"Paragraph"> | number
     line?: StringFilter<"Paragraph"> | string
-    number?: IntFilter<"Paragraph"> | number
     isTag?: BoolFilter<"Paragraph"> | boolean
     chapterId?: StringNullableFilter<"Paragraph"> | string | null
     chapter?: XOR<ChapterNullableScalarRelationFilter, ChapterWhereInput> | null
@@ -4748,8 +4767,8 @@ export namespace Prisma {
 
   export type ParagraphOrderByWithAggregationInput = {
     id?: SortOrder
+    index?: SortOrder
     line?: SortOrder
-    number?: SortOrder
     isTag?: SortOrder
     chapterId?: SortOrderInput | SortOrder
     _count?: ParagraphCountOrderByAggregateInput
@@ -4764,8 +4783,8 @@ export namespace Prisma {
     OR?: ParagraphScalarWhereWithAggregatesInput[]
     NOT?: ParagraphScalarWhereWithAggregatesInput | ParagraphScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Paragraph"> | string
+    index?: IntWithAggregatesFilter<"Paragraph"> | number
     line?: StringWithAggregatesFilter<"Paragraph"> | string
-    number?: IntWithAggregatesFilter<"Paragraph"> | number
     isTag?: BoolWithAggregatesFilter<"Paragraph"> | boolean
     chapterId?: StringNullableWithAggregatesFilter<"Paragraph"> | string | null
   }
@@ -4833,6 +4852,7 @@ export namespace Prisma {
   export type ChapterCreateInput = {
     id?: string
     index?: number
+    imageUrl?: string | null
     title: string
     slug: string
     paragraphs?: ParagraphCreateNestedManyWithoutChapterInput
@@ -4842,6 +4862,7 @@ export namespace Prisma {
   export type ChapterUncheckedCreateInput = {
     id?: string
     index?: number
+    imageUrl?: string | null
     title: string
     slug: string
     bibleStudyId?: string | null
@@ -4851,6 +4872,7 @@ export namespace Prisma {
   export type ChapterUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     index?: IntFieldUpdateOperationsInput | number
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     paragraphs?: ParagraphUpdateManyWithoutChapterNestedInput
@@ -4860,6 +4882,7 @@ export namespace Prisma {
   export type ChapterUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     index?: IntFieldUpdateOperationsInput | number
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     bibleStudyId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -4869,6 +4892,7 @@ export namespace Prisma {
   export type ChapterCreateManyInput = {
     id?: string
     index?: number
+    imageUrl?: string | null
     title: string
     slug: string
     bibleStudyId?: string | null
@@ -4877,6 +4901,7 @@ export namespace Prisma {
   export type ChapterUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     index?: IntFieldUpdateOperationsInput | number
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
   }
@@ -4884,6 +4909,7 @@ export namespace Prisma {
   export type ChapterUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     index?: IntFieldUpdateOperationsInput | number
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     bibleStudyId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -4891,55 +4917,55 @@ export namespace Prisma {
 
   export type ParagraphCreateInput = {
     id?: string
+    index?: number
     line: string
-    number: number
-    isTag: boolean
+    isTag?: boolean
     chapter?: ChapterCreateNestedOneWithoutParagraphsInput
   }
 
   export type ParagraphUncheckedCreateInput = {
     id?: string
+    index?: number
     line: string
-    number: number
-    isTag: boolean
+    isTag?: boolean
     chapterId?: string | null
   }
 
   export type ParagraphUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    index?: IntFieldUpdateOperationsInput | number
     line?: StringFieldUpdateOperationsInput | string
-    number?: IntFieldUpdateOperationsInput | number
     isTag?: BoolFieldUpdateOperationsInput | boolean
     chapter?: ChapterUpdateOneWithoutParagraphsNestedInput
   }
 
   export type ParagraphUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    index?: IntFieldUpdateOperationsInput | number
     line?: StringFieldUpdateOperationsInput | string
-    number?: IntFieldUpdateOperationsInput | number
     isTag?: BoolFieldUpdateOperationsInput | boolean
     chapterId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ParagraphCreateManyInput = {
     id?: string
+    index?: number
     line: string
-    number: number
-    isTag: boolean
+    isTag?: boolean
     chapterId?: string | null
   }
 
   export type ParagraphUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    index?: IntFieldUpdateOperationsInput | number
     line?: StringFieldUpdateOperationsInput | string
-    number?: IntFieldUpdateOperationsInput | number
     isTag?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ParagraphUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    index?: IntFieldUpdateOperationsInput | number
     line?: StringFieldUpdateOperationsInput | string
-    number?: IntFieldUpdateOperationsInput | number
     isTag?: BoolFieldUpdateOperationsInput | boolean
     chapterId?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -5102,6 +5128,7 @@ export namespace Prisma {
   export type ChapterCountOrderByAggregateInput = {
     id?: SortOrder
     index?: SortOrder
+    imageUrl?: SortOrder
     title?: SortOrder
     slug?: SortOrder
     bibleStudyId?: SortOrder
@@ -5114,6 +5141,7 @@ export namespace Prisma {
   export type ChapterMaxOrderByAggregateInput = {
     id?: SortOrder
     index?: SortOrder
+    imageUrl?: SortOrder
     title?: SortOrder
     slug?: SortOrder
     bibleStudyId?: SortOrder
@@ -5122,6 +5150,7 @@ export namespace Prisma {
   export type ChapterMinOrderByAggregateInput = {
     id?: SortOrder
     index?: SortOrder
+    imageUrl?: SortOrder
     title?: SortOrder
     slug?: SortOrder
     bibleStudyId?: SortOrder
@@ -5143,34 +5172,34 @@ export namespace Prisma {
 
   export type ParagraphCountOrderByAggregateInput = {
     id?: SortOrder
+    index?: SortOrder
     line?: SortOrder
-    number?: SortOrder
     isTag?: SortOrder
     chapterId?: SortOrder
   }
 
   export type ParagraphAvgOrderByAggregateInput = {
-    number?: SortOrder
+    index?: SortOrder
   }
 
   export type ParagraphMaxOrderByAggregateInput = {
     id?: SortOrder
+    index?: SortOrder
     line?: SortOrder
-    number?: SortOrder
     isTag?: SortOrder
     chapterId?: SortOrder
   }
 
   export type ParagraphMinOrderByAggregateInput = {
     id?: SortOrder
+    index?: SortOrder
     line?: SortOrder
-    number?: SortOrder
     isTag?: SortOrder
     chapterId?: SortOrder
   }
 
   export type ParagraphSumOrderByAggregateInput = {
-    number?: SortOrder
+    index?: SortOrder
   }
 
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -5444,6 +5473,7 @@ export namespace Prisma {
   export type ChapterCreateWithoutBibleStudyInput = {
     id?: string
     index?: number
+    imageUrl?: string | null
     title: string
     slug: string
     paragraphs?: ParagraphCreateNestedManyWithoutChapterInput
@@ -5452,6 +5482,7 @@ export namespace Prisma {
   export type ChapterUncheckedCreateWithoutBibleStudyInput = {
     id?: string
     index?: number
+    imageUrl?: string | null
     title: string
     slug: string
     paragraphs?: ParagraphUncheckedCreateNestedManyWithoutChapterInput
@@ -5489,6 +5520,7 @@ export namespace Prisma {
     NOT?: ChapterScalarWhereInput | ChapterScalarWhereInput[]
     id?: StringFilter<"Chapter"> | string
     index?: IntFilter<"Chapter"> | number
+    imageUrl?: StringNullableFilter<"Chapter"> | string | null
     title?: StringFilter<"Chapter"> | string
     slug?: StringFilter<"Chapter"> | string
     bibleStudyId?: StringNullableFilter<"Chapter"> | string | null
@@ -5496,16 +5528,16 @@ export namespace Prisma {
 
   export type ParagraphCreateWithoutChapterInput = {
     id?: string
+    index?: number
     line: string
-    number: number
-    isTag: boolean
+    isTag?: boolean
   }
 
   export type ParagraphUncheckedCreateWithoutChapterInput = {
     id?: string
+    index?: number
     line: string
-    number: number
-    isTag: boolean
+    isTag?: boolean
   }
 
   export type ParagraphCreateOrConnectWithoutChapterInput = {
@@ -5560,8 +5592,8 @@ export namespace Prisma {
     OR?: ParagraphScalarWhereInput[]
     NOT?: ParagraphScalarWhereInput | ParagraphScalarWhereInput[]
     id?: StringFilter<"Paragraph"> | string
+    index?: IntFilter<"Paragraph"> | number
     line?: StringFilter<"Paragraph"> | string
-    number?: IntFilter<"Paragraph"> | number
     isTag?: BoolFilter<"Paragraph"> | boolean
     chapterId?: StringNullableFilter<"Paragraph"> | string | null
   }
@@ -5596,6 +5628,7 @@ export namespace Prisma {
   export type ChapterCreateWithoutParagraphsInput = {
     id?: string
     index?: number
+    imageUrl?: string | null
     title: string
     slug: string
     bibleStudy?: BibleStudyCreateNestedOneWithoutChaptersInput
@@ -5604,6 +5637,7 @@ export namespace Prisma {
   export type ChapterUncheckedCreateWithoutParagraphsInput = {
     id?: string
     index?: number
+    imageUrl?: string | null
     title: string
     slug: string
     bibleStudyId?: string | null
@@ -5628,6 +5662,7 @@ export namespace Prisma {
   export type ChapterUpdateWithoutParagraphsInput = {
     id?: StringFieldUpdateOperationsInput | string
     index?: IntFieldUpdateOperationsInput | number
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     bibleStudy?: BibleStudyUpdateOneWithoutChaptersNestedInput
@@ -5636,6 +5671,7 @@ export namespace Prisma {
   export type ChapterUncheckedUpdateWithoutParagraphsInput = {
     id?: StringFieldUpdateOperationsInput | string
     index?: IntFieldUpdateOperationsInput | number
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     bibleStudyId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -5644,6 +5680,7 @@ export namespace Prisma {
   export type ChapterCreateManyBibleStudyInput = {
     id?: string
     index?: number
+    imageUrl?: string | null
     title: string
     slug: string
   }
@@ -5651,6 +5688,7 @@ export namespace Prisma {
   export type ChapterUpdateWithoutBibleStudyInput = {
     id?: StringFieldUpdateOperationsInput | string
     index?: IntFieldUpdateOperationsInput | number
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     paragraphs?: ParagraphUpdateManyWithoutChapterNestedInput
@@ -5659,6 +5697,7 @@ export namespace Prisma {
   export type ChapterUncheckedUpdateWithoutBibleStudyInput = {
     id?: StringFieldUpdateOperationsInput | string
     index?: IntFieldUpdateOperationsInput | number
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     paragraphs?: ParagraphUncheckedUpdateManyWithoutChapterNestedInput
@@ -5667,35 +5706,36 @@ export namespace Prisma {
   export type ChapterUncheckedUpdateManyWithoutBibleStudyInput = {
     id?: StringFieldUpdateOperationsInput | string
     index?: IntFieldUpdateOperationsInput | number
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
   }
 
   export type ParagraphCreateManyChapterInput = {
     id?: string
+    index?: number
     line: string
-    number: number
-    isTag: boolean
+    isTag?: boolean
   }
 
   export type ParagraphUpdateWithoutChapterInput = {
     id?: StringFieldUpdateOperationsInput | string
+    index?: IntFieldUpdateOperationsInput | number
     line?: StringFieldUpdateOperationsInput | string
-    number?: IntFieldUpdateOperationsInput | number
     isTag?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ParagraphUncheckedUpdateWithoutChapterInput = {
     id?: StringFieldUpdateOperationsInput | string
+    index?: IntFieldUpdateOperationsInput | number
     line?: StringFieldUpdateOperationsInput | string
-    number?: IntFieldUpdateOperationsInput | number
     isTag?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ParagraphUncheckedUpdateManyWithoutChapterInput = {
     id?: StringFieldUpdateOperationsInput | string
+    index?: IntFieldUpdateOperationsInput | number
     line?: StringFieldUpdateOperationsInput | string
-    number?: IntFieldUpdateOperationsInput | number
     isTag?: BoolFieldUpdateOperationsInput | boolean
   }
 

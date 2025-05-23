@@ -131,6 +131,7 @@ exports.Prisma.BibleStudyScalarFieldEnum = {
 exports.Prisma.ChapterScalarFieldEnum = {
   id: 'id',
   index: 'index',
+  imageUrl: 'imageUrl',
   title: 'title',
   slug: 'slug',
   bibleStudyId: 'bibleStudyId'
@@ -138,8 +139,8 @@ exports.Prisma.ChapterScalarFieldEnum = {
 
 exports.Prisma.ParagraphScalarFieldEnum = {
   id: 'id',
+  index: 'index',
   line: 'line',
-  number: 'number',
   isTag: 'isTag',
   chapterId: 'chapterId'
 };

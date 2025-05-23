@@ -44,7 +44,7 @@ export default function ResponsiveDrawer({
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogContent
             className={cn(
-              "h-auto max-h-dvh overflow-y-auto scroll-smooth",
+              "h-auto max-h-dvh  overflow-y-auto scroll-smooth",
               className,
             )}
           >

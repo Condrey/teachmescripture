@@ -39,7 +39,7 @@ export default function FormAddEditChapter({open,setOpen,chapterToEdit,bibleStud
     open={open}
     setOpen={setOpen}
     title={chapterToEdit?'Edit this chapter':'Create a new chapter'}
-    description={bibleStudy?.name!}
+    description={   `Series: ${bibleStudy?.name} bible study series`}
     >
         <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">

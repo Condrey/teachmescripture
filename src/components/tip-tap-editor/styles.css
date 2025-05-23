@@ -1,9 +1,12 @@
 .tiptap p.is-editor-empty:first-child::before {
-  color: theme("colors.muted.foreground");
+  color: var(--color-muted-foreground);
   content: attr(data-placeholder);
   float: left;
   height: 0;
   pointer-events: none;
+  font-size: var(--text-sm) /* 0.875rem = 14px */;
+    line-height: var(--tw-leading, var(--text-sm--line-height) /* calc(1.25 / 0.875) ≈ 1.4286 */);
+
 }
 
 .tiptap.ProseMirror {
