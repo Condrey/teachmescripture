@@ -120,6 +120,12 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.ProjectScalarFieldEnum = {
+  id: 'id',
+  webName: 'webName',
+  aboutText: 'aboutText'
+};
+
 exports.Prisma.BibleStudyScalarFieldEnum = {
   id: 'id',
   index: 'index',
@@ -162,6 +168,7 @@ exports.Prisma.NullsOrder = {
 
 
 exports.Prisma.ModelName = {
+  Project: 'Project',
   BibleStudy: 'BibleStudy',
   Chapter: 'Chapter',
   Paragraph: 'Paragraph'

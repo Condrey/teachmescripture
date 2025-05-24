@@ -28,8 +28,14 @@ export const paragraphSchema = z.object({
   isTag: z
     .boolean()
     .describe(
-      "This determines whether the paragraph is a tag or not. When it is in between <bl></bl>. If a <quote></quote> is part of the line, split the paragraph and let the quote be an independent paragraph."
+      "This determines whether the paragraph is a tag or not. When it is in between <bl></bl>. "
     ),
   chapterId: requiredString,
 });
 export type ParagraphSchema = z.infer<typeof paragraphSchema>;
+
+// about page 
+ export const aboutPageSchema = z.object({
+        id: z.string().optional(),
+        aboutText: z.string().min(1, "About text is required").max(500, "About text must be less than 500 characters"),})
+        export type AboutPageSchema = z.infer<typeof aboutPageSchema>;

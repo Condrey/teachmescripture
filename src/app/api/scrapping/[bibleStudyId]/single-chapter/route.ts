@@ -1,6 +1,5 @@
-
 import prisma from "@/lib/prisma";
-import { bibleStudyDataInclude, chapterDataInclude } from "@/lib/types";
+import { chapterDataInclude } from "@/lib/types";
 import { HTMLWebBaseLoader } from "@langchain/community/document_loaders/web/html";
 import { NextRequest } from "next/server";
 import z from "zod";
@@ -14,7 +13,7 @@ export async function POST(req: NextRequest, segmentData: { params: Params }) {
   const { bibleStudyId } = await segmentData.params;
   const schema = z.object({
     baseUrl: z.string().url().trim(),
-    chapterSlug:z.string().trim(),
+    chapterSlug: z.string().trim(),
   });
 
   try {
@@ -33,8 +32,12 @@ export async function POST(req: NextRequest, segmentData: { params: Params }) {
       );
     }
 
-    const { baseUrl ,chapterSlug} = parseResult.data;
-    const paragraphs = await generateParagraphs(bibleStudyId, baseUrl,chapterSlug);
+    const { baseUrl, chapterSlug } = parseResult.data;
+    const paragraphs = await generateParagraphs(
+      bibleStudyId,
+      baseUrl,
+      chapterSlug
+    );
     return Response.json(
       {
         message: "Successfully generated paragraphs for all the chapters",
@@ -54,32 +57,34 @@ export async function POST(req: NextRequest, segmentData: { params: Params }) {
   }
 }
 
-async function generateParagraphs(bibleStudyId: string, baseUrl: string,chapterSlug: string) {
-  
-  const chapter= await prisma.chapter.findUnique({where:{slug:chapterSlug},include:chapterDataInclude})
-   if (!chapter)
+async function generateParagraphs(
+  bibleStudyId: string,
+  baseUrl: string,
+  chapterSlug: string
+) {
+  const chapter = await prisma.chapter.findUnique({
+    where: { slug: chapterSlug },
+    include: chapterDataInclude,
+  });
+  if (!chapter)
     return Response.json(
       { error: "Chapter not found" },
       { status: 404, statusText: "Chapter not found" }
     );
-  const bibleStudy = chapter.bibleStudy
- 
-  
-      const url =baseUrl+'/'+chapterSlug;
-      const content = (await getContent(url)).replaceAll("<br><br>", "<br>")
-        .replaceAll('"', '\"')
-        .replaceAll("'", "\'")
-        ;
-      const generatedParagraphs = await aiCoreWhole({
-        bibleStudyId,
-        content,
-        bibleStudyName: bibleStudy?.name!,
-        chapterSlug,
-        chapterName:chapter.title, chapterId:chapter.id
-      });
+  const bibleStudy = chapter.bibleStudy;
 
-      console.log('Successfully generated paragraphs for bible study: ', chapter.title);
-console.log('Generated paragraphs: ', generatedParagraphs);
+  const url = baseUrl + "/" + chapterSlug;
+  const content = await getContent(url);
+  const generatedParagraphs = await aiCoreWhole({
+    bibleStudyId,
+    content,
+    bibleStudyName: bibleStudy?.name!,
+    chapterSlug,
+    chapterName: chapter.title,
+    chapterId: chapter.id,
+  });
+
+
   return generatedParagraphs;
 }
 

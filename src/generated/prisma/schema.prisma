@@ -14,6 +14,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Project {
+  id        String @id @default(uuid())
+  webName   String @unique
+  aboutText String
+}
+
 model BibleStudy {
   id       String    @id @default(uuid())
   index    Int       @default(autoincrement())

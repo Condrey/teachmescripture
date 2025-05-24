@@ -7,6 +7,7 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
+  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
 import { cn } from "@/lib/utils";
@@ -34,35 +35,11 @@ export default function Header() {
     <div className="w-full py-2 sticky top-0 bg-background/10 backdrop-blur-md z-50">
       <NavigationMenu className="w-full max-w-7xl mx-auto  flex justify-between">
         <NavigationMenuList>
-          <NavigationMenuItem>
-            <NavigationMenuLink
-              active={isHomeActive}
-              onClick={() => startTransition(() => {})}
-              className="p-0 overflow-hidden"
-            >
-              <div>
-                <LoadingButton
-                  loading={isPending}
-                  variant={"ghost"}
-                  className={cn(
-                    "p-0 ",
-                    isHomeActive && "pointer-events-none uppercase",
-                    isPending && "ps-3 "
-                  )}
-                >
-                  <Link
-                    href={homeUrl}
-                    passHref
-                    className=" size-full px-3 py-2"
-                  >
-                    Home{" "}
-                  </Link>
-                </LoadingButton>
-              </div>
-            </NavigationMenuLink>
-          </NavigationMenuItem>
+           <NavMenuItem navLink={{title:'Home',url:'/'}} isActive={isHomeActive} />    
           {navLinks.map((navLink) => {
-            return <NavMenuItem key={navLink.url} navLink={navLink} />;
+              const isActive = pathname.startsWith(navLink.url) && pathname !== "/";
+
+            return <NavMenuItem key={navLink.url} navLink={navLink} isActive={isActive} />;
           })}
         </NavigationMenuList>
         <NavigationMenuList>
@@ -77,15 +54,15 @@ export default function Header() {
 
 interface NavMenuItemProps {
   navLink: NavLink;
+  isActive:boolean
 }
 
-function NavMenuItem({ navLink: { url, title } }: NavMenuItemProps) {
+function NavMenuItem({ navLink: { url, title },isActive }: NavMenuItemProps) {
   const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
   const { getNavigationLinkWithPathnameWithoutUpdate } =
     useCustomSearchParams();
   const modifiedUrl = getNavigationLinkWithPathnameWithoutUpdate(`${url}`);
-  const isActive = pathname.startsWith(url) && pathname !== "/";
 
   return (
     <NavigationMenuItem>
@@ -93,21 +70,20 @@ function NavMenuItem({ navLink: { url, title } }: NavMenuItemProps) {
         active={isActive}
         disabled={pathname===url}
         onClick={() => startTransition(() => {})}
-        className="p-0 " // className={navigationMenuTriggerStyle()}
+         className={cn("p-0 ")}
         
       >
-        <div>
+        <div className="flex items-center gap-0">
           <LoadingButton
             loading={isPending}
             variant={"ghost"}
             className={cn(
-              "p-0",
-              isActive &&  " uppercase",
+              "p-0 ",
               isPending && "ps-3"
             )}
           >
-            <Link href={modifiedUrl} className=" size-full px-3 py-2 ">
-             {title}
+            <Link href={modifiedUrl} className=" size-full px-3 py-2 text-lg uppercase tracking-tight font-semibold">
+      {title}
             </Link>
           </LoadingButton>
         </div>

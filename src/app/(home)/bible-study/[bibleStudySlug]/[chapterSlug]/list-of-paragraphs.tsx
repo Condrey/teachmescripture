@@ -74,7 +74,7 @@ export function ListOfParagraphs({ chapter }: ListOfParagraphsProps) {
               </ButtonDeleteParagraph>
               <div className={cn(" *:text-justify  py-4 px-2 transition-all delay-200 200 ease-in rounded-md flex-1 max-w-3xl w-full mx-auto",
                 'peer-hover/edit:bg-secondary  peer-hover/edit:text-secondary-foreground peer-focus:edit:bg-secondary peer-focus/edit:text-secondary-foreground',
-                'peer-hover/delete:bg-destructive/20  peer-hover/delete:text-destructive-foreground peer-focus:delete:bg-destructive/20 peer-focus/delete:text-destructive-foreground',
+                'peer-hover/delete:bg-destructive-foreground  peer-hover/delete:text-destructive peer-focus:delete:bg-destructive-foreground peer-focus/delete:text-destructive',
               )}>
                 {!isTag ? (
                   <TipTapViewer content={line} />

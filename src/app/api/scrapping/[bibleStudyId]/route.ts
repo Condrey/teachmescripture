@@ -1,4 +1,3 @@
-
 import prisma from "@/lib/prisma";
 import { bibleStudyDataInclude } from "@/lib/types";
 import { HTMLWebBaseLoader } from "@langchain/community/document_loaders/web/html";
@@ -64,25 +63,22 @@ async function generateParagraphs(bibleStudyId: string, baseUrl: string) {
       { status: 404, statusText: "Bible study not found" }
     );
   const promises = bibleStudy.chapters.map(
-    async ({ slug: chapterSlug, title: chapterName,id:chapterId }) => {
+    async ({ slug: chapterSlug, title: chapterName, id: chapterId }) => {
       const url = `${baseUrl}/${chapterSlug}`;
-      const content = (await getContent(url))
-        .replaceAll("<br><br>", "<br>")
-        .replaceAll('"', '\"')
-        .replaceAll("'", "\'");
+      const content = await getContent(url);
       const generatedParagraphs = await aiCoreWhole({
         bibleStudyId,
         content,
         bibleStudyName: bibleStudy.name,
         chapterSlug,
-        chapterName,chapterId
+        chapterName,
+        chapterId,
       });
-      return generatedParagraphs || []; // Return an empty array if nothing was generated
+      return generatedParagraphs || []; // Return an empty array if nothing was generated 
     }
   );
 
   const results = await Promise.all(promises);
-      console.log('Successfully generated paragraphs for bible study: ', bibleStudy.name);
 
   // Flatten the results and assign to paragraphs
   const paragraphs = results.flat();
@@ -99,7 +95,8 @@ async function getContent(url: string) {
   if (endIndex !== -1) {
     content = content.substring(startIndex, endIndex);
   }
-  return content.replaceAll("<br><br>", "<br>")
-        .replaceAll('"', "\"")
-        .replaceAll("'", "\'");
+  return content
+    .replaceAll("<br><br>", "<br>")
+    .replaceAll('"', '"')
+    .replaceAll("'", "'");
 }

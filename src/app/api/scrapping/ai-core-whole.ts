@@ -62,17 +62,21 @@ export async function aiCoreWhole({
 
     const chain = RunnableSequence.from([
       ChatPromptTemplate.fromTemplate(
-        "Extract content from web scrapped content, values returned should be in html tags.\n{format_instructions}\n{content}\n{bibleStudyName}\n{chapterName}\n{chapterSlug}\n{chapterId}\n\n"
+        "Extract content from web scrapped content, values returned should be in html tags. Intelligently close unterminated string.\n{format_instructions}\n{content}\n{bibleStudyName}\n{chapterName}\n{chapterSlug}\n{chapterId}\n\n"
       ),
       model,
       parser,
     ]);
 
     const scrappedParagraphs = await chain.invoke({
-      content: content
-        .replaceAll('"', '\"')
-        .replaceAll("'", "\'")
-        .replaceAll("<br><br>", "<br>"),
+      content: JSON.stringify(
+        `${content
+          .replaceAll('"', '\\"')
+          .replaceAll("'", "\\'")
+          .replaceAll("<br><br>", "<br>")
+          .replaceAll("<bl>", "<br><bl>")
+          .replaceAll("<quote>", "<br><quote>")}`
+      ),
       bibleStudyName,
       chapterName,
       chapterSlug,
@@ -86,7 +90,6 @@ export async function aiCoreWhole({
       const chunk = scrappedParagraphs.paragraphs
         .slice(i, i + chunkSize)
         .map((f) => ({ ...f, id: chapterId + f.id }));
-      console.log("chunk", chunk);
       for (let attempt = 0; attempt < retries; attempt++) {
         try {
           await prisma.$transaction([
@@ -109,11 +112,6 @@ export async function aiCoreWhole({
             }),
           ]);
 
-          console.log(
-            `Chunk ${i / chunkSize + 1} - ${scrappedParagraphs.chapterName} (${
-              chunk.length
-            }) inserted successfully.`
-          );
           break; // Exit retry loop if successful
         } catch (error) {
           console.error(
